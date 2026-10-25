@@ -1,248 +1,253 @@
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>THE IRISHMAN 1 | Crypto Intelligence</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THE IRISHMAN 1 — Crypto Intelligence</title>
 <style>
-:root{color-scheme:dark;--bg:#080d17;--panel:#101b2b;--line:#283950;--text:#edf4ff;--muted:#91a3bc;--green:#63e6be;--red:#ff7889;--blue:#83aaff;--gold:#f5ce79}
+:root{color-scheme:dark;--bg:#080d17;--panel:#111d2d;--line:#293b53;--text:#edf4ff;--muted:#93a6c0;--green:#63e6be;--red:#ff7889;--blue:#83aaff;--gold:#f5ce79}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font:14px system-ui,sans-serif}
-header{padding:18px 5%;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-.brand{font-weight:900;letter-spacing:2px}.brand span{color:var(--green)}
-.status{color:var(--muted);font-size:12px}
+body{margin:0;background:radial-gradient(ellipse at top,#18314b,var(--bg) 55%);color:var(--text);font:14px system-ui,sans-serif}
+header{padding:16px 4%;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-weight:950;letter-spacing:2px}.brand b,h1 em{color:var(--green)}
 main{max-width:1300px;margin:auto;padding:24px 4%}
-h1{font-size:clamp(28px,5vw,46px);line-height:1.1;margin:0 0 10px}
-h1 span{color:var(--green)}h2{font-size:18px;margin:0 0 16px}
-p{color:var(--muted)}
-.hero{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:25px}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:18px;min-width:0}
-.controls,.metrics,.layout,.bottom{display:grid;gap:12px;margin-bottom:14px}
-.controls{grid-template-columns:repeat(3,minmax(0,1fr))}
+nav{display:flex;gap:15px;flex-wrap:wrap;padding:12px 4%;border-bottom:1px solid var(--line)}
+a{color:var(--green);text-decoration:none}
+h1{font-size:clamp(30px,5vw,48px);line-height:1.1;margin:10px 0}
+h1 em{font-style:normal}h2{font-size:17px;margin:0 0 14px}
+p,.muted,.small{color:var(--muted)}.small{font-size:11px}
+.hero{margin-bottom:22px}.panel{background:linear-gradient(140deg,#132237,#0c1625);border:1px solid var(--line);border-radius:13px;padding:16px;min-width:0}
+.grid{display:grid;gap:12px;margin-bottom:13px}
+.controls{grid-template-columns:repeat(4,minmax(0,1fr))}
 .metrics{grid-template-columns:repeat(4,minmax(0,1fr))}
-.layout{grid-template-columns:minmax(0,1.7fr) minmax(240px,.8fr)}
-.bottom{grid-template-columns:repeat(2,minmax(0,1fr))}
-label{display:flex;flex-direction:column;gap:7px;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:1px}
-select,input,button{padding:11px;background:#0a1220;border:1px solid var(--line);color:var(--text);border-radius:7px;font:inherit}
-button{cursor:pointer;background:var(--green);color:#06251d;border:0;font-weight:800}
-button.secondary{background:#1a2a40;color:var(--text);border:1px solid var(--line)}
-button:disabled{opacity:.4}
-.metric-label{color:var(--muted);font-size:10px;letter-spacing:1px}
-.metric-value{font-size:clamp(18px,3vw,27px);font-weight:800;margin:8px 0}
-.small{color:var(--muted);font-size:11px}
+.columns{grid-template-columns:minmax(0,1.6fr) minmax(260px,.8fr)}
+label{display:flex;flex-direction:column;gap:7px;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:1px}
+input,select,button{font:inherit;padding:10px;border-radius:7px;border:1px solid var(--line);background:#091321;color:var(--text);width:100%}
+button{background:var(--green);color:#06251d;border:0;font-weight:850;cursor:pointer}
+button.secondary{background:#1c2c42;color:var(--text);border:1px solid var(--line)}
+.metric{font-size:clamp(21px,3vw,30px);font-weight:900;margin:8px 0;overflow-wrap:anywhere}
 .green{color:var(--green)}.red{color:var(--red)}.gold{color:var(--gold)}
-canvas{width:100%;height:300px;display:block}
-.signal{display:inline-block;padding:7px 10px;border-radius:6px;background:#253249;font-weight:900;font-size:11px}
-.signal.bull{background:#123c32;color:var(--green)}
-.signal.bear{background:#46212c;color:var(--red)}
-.row{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
-.note{font-size:11px;line-height:1.6}
-.trade-controls{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.trade-controls button{grid-column:1/-1}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:15px 0}
-.stats div{background:#0a1220;padding:10px;border-radius:7px}
-.stats strong{display:block;font-size:19px;margin-top:4px}
-table{width:100%;border-collapse:collapse;font-size:11px}
-th,td{text-align:left;padding:10px 5px;border-bottom:1px solid var(--line)}
-th{color:var(--muted)}.tablewrap{overflow-x:auto}
-footer{padding:25px 0;color:var(--muted);font-size:10px}
-@media(max-width:760px){.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.layout,.bottom{grid-template-columns:1fr}.hero{align-items:flex-start;flex-direction:column}canvas{height:240px}}
-@media(max-width:430px){.controls{grid-template-columns:1fr}.panel{padding:13px}}
+.row{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #26364a}
+.row span{color:var(--muted)}.row strong{text-align:right}
+.charthead,.split{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+canvas{display:block;width:100%;height:300px}
+.chip{display:inline-block;padding:7px 10px;border-radius:7px;background:#26354b;font-weight:900}
+.bull{color:var(--green);background:#123b32}.bear{color:var(--red);background:#46212c}
+.inline{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:12px 0}
+.stat{padding:10px;background:#091321;border:1px solid var(--line);border-radius:8px;min-width:0}
+.stat strong{display:block;font-size:19px;overflow-wrap:anywhere}
+.actions{display:flex;gap:8px;flex-wrap:wrap}.actions button{flex:1}
+.note{margin-top:10px;padding:10px;border-left:3px solid var(--gold);background:#242219;color:#e8d9ac;font-size:11px}
+.tablewrap{overflow:auto}table{border-collapse:collapse;width:100%;font-size:11px}
+th,td{text-align:left;padding:9px 6px;border-bottom:1px solid var(--line);white-space:nowrap}
+th{color:var(--muted)}.empty{text-align:center;color:var(--muted);padding:20px}
+.knowledge{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.knowledge article{background:#091321;border:1px solid var(--line);border-radius:8px;padding:10px}
+.knowledge p{font-size:11px;line-height:1.5;margin-bottom:0}
+footer{padding:25px 0;color:var(--muted);font-size:11px}
+@media(max-width:800px){.columns{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.controls{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:480px){main{padding:14px 3%}.controls{grid-template-columns:1fr}.panel{padding:12px}.knowledge{grid-template-columns:1fr}canvas{height:250px}}
 </style>
 </head>
 <body>
 <header>
-  <div class="brand">THE <span>IRISHMAN</span> 1</div>
-  <div class="status" id="status">Connecting to public market data…</div>
+ <div class="brand">THE <b>IRISHMAN</b> 1</div>
+ <div class="split"><span id="status" class="small">Connecting to market feed…</span><button id="refresh" style="width:auto">Refresh ↻</button></div>
 </header>
+<nav><a href="#market">Market</a><a href="#signals">Intelligence</a><a href="#lab">Strategy Lab</a><a href="#risk">Risk</a><a href="#paper">Paper Trading</a><a href="#journal">Journal</a><a href="#knowledge">Knowledge</a></nav>
 <main>
-  <section class="hero">
-    <div>
-      <div class="small green">CRYPTO INTELLIGENCE / TRADER ANALYTICS</div>
-      <h1>Know the setup.<br><span>Measure the risk.</span></h1>
-      <p>Live market analysis, 15-minute signals and simulated trading.</p>
-    </div>
-    <div><div class="metric-label">MARKET</div><div class="metric-value" id="marketName">BTC / USDT</div><div class="small" id="updated">Waiting for data</div></div>
-  </section>
+<section class="hero">
+ <div class="small">INDEPENDENT CRYPTO RESEARCH WORKSPACE</div>
+ <h1>Read the market.<br><em>Test the thesis.</em></h1>
+ <p>Live spot candles, explainable indicators, historical strategy simulations, position sizing, and a private paper-trading journal.</p>
+</section>
 
-  <section class="controls panel">
-    <label>Crypto market
-      <select id="symbol">
-        <option>BTCUSDT</option><option>ETHUSDT</option><option>SOLUSDT</option>
-        <option>BNBUSDT</option><option>XRPUSDT</option><option>DOGEUSDT</option>
-      </select>
-    </label>
-    <label>Candle interval
-      <select id="interval">
-        <option value="15m">15 minutes</option><option value="5m">5 minutes</option>
-        <option value="1h">1 hour</option><option value="4h">4 hours</option>
-      </select>
-    </label>
-    <button id="refresh">Refresh market ↻</button>
-  </section>
+<section id="market" class="grid controls panel">
+<label>Asset<select id="symbol">
+<option>BTCUSDT</option><option>ETHUSDT</option><option>SOLUSDT</option><option>BNBUSDT</option><option>XRPUSDT</option><option>DOGEUSDT</option><option>ADAUSDT</option><option>LINKUSDT</option>
+</select></label>
+<label>Timeframe<select id="interval"><option value="15m">15 minutes</option><option value="5m">5 minutes</option><option value="1h">1 hour</option><option value="4h">4 hours</option><option value="1d">1 day</option></select></label>
+<label>History<select id="limit"><option>100</option><option>250</option><option>500</option></select></label>
+<label>Data source<input readonly value="Public Binance spot candles"></label>
+</section>
 
-  <section class="metrics">
-    <article class="panel"><div class="metric-label">LAST PRICE</div><div class="metric-value" id="price">—</div><div class="small" id="change">—</div></article>
-    <article class="panel"><div class="metric-label">RSI · 14</div><div class="metric-value" id="rsi">—</div><div class="small" id="rsiText">Momentum</div></article>
-    <article class="panel"><div class="metric-label">MACD</div><div class="metric-value" id="macd">—</div><div class="small" id="macdText">Trend momentum</div></article>
-    <article class="panel"><div class="metric-label">EMA · 9 / 21</div><div class="metric-value" id="ema">—</div><div class="small" id="emaText">Trend alignment</div></article>
-  </section>
+<section class="grid metrics">
+ <article class="panel"><div class="small">LAST PRICE · USDT</div><div id="price" class="metric">—</div><div id="change" class="small">Waiting for data</div></article>
+ <article class="panel"><div class="small">RSI · 14</div><div id="rsi" class="metric">—</div><div id="rsiNote" class="small">Momentum</div></article>
+ <article class="panel"><div class="small">MACD · 12/26/9</div><div id="macd" class="metric">—</div><div id="macdNote" class="small">Trend momentum</div></article>
+ <article class="panel"><div class="small">EMA 9 / EMA 21</div><div id="ema" class="metric">—</div><div id="emaNote" class="small">Moving averages</div></article>
+</section>
 
-  <section class="layout">
-    <article class="panel">
-      <h2 id="chartTitle">BTC / USDT · 15m</h2>
-      <canvas id="chart"></canvas>
-      <div class="small">Close price · EMA 9 (blue) · EMA 21 (gold)</div>
-      <p class="note" id="chartStatus">Loading candles…</p>
-    </article>
-    <article class="panel">
-      <h2>Market signal snapshot</h2>
-      <div id="signal" class="signal">WAITING FOR DATA</div>
-      <p id="summary">Waiting for sufficient market data.</p>
-      <div class="row"><span>Trend vs EMA 21</span><strong id="trend">—</strong></div>
-      <div class="row"><span>Bollinger Bands</span><strong id="bb">—</strong></div>
-      <div class="row"><span>Latest candle</span><strong id="candle">—</strong></div>
-      <div class="row"><span>Indicator score</span><strong id="score">—</strong></div>
-      <p class="note">Signals are rule-based indicator summaries, not verified predictions. They do not establish the probability of a profitable trade.</p>
-    </article>
-  </section>
+<section class="grid columns">
+ <article class="panel">
+  <div class="charthead"><div><h2 id="chartTitle">Market chart</h2><div class="small">Candlesticks with EMA overlays</div></div><div class="small"><span class="green">● Up</span> <span class="red">● Down</span></div></div>
+  <canvas id="chart" aria-label="Candlestick chart"></canvas>
+  <div id="chartNote" class="small">Loading candles…</div>
+ </article>
+ <article id="signals" class="panel">
+  <h2>Intelligence desk</h2><span id="signal" class="chip">WAITING FOR DATA</span>
+  <p id="signalText" class="small">Indicator analysis will appear here.</p>
+  <div class="row"><span>Price vs EMA 21</span><strong id="trend">—</strong></div>
+  <div class="row"><span>Bollinger bands</span><strong id="bands">—</strong></div>
+  <div class="row"><span>Last candle</span><strong id="candle">—</strong></div>
+  <div class="row"><span>Indicator agreement</span><strong id="score">—</strong></div>
+  <div class="row"><span>Mean range · 20 bars</span><strong id="volatility">—</strong></div>
+  <div class="note">Rule-based indicator agreement is not a probability or guaranteed forecast. The latest candle may still be open.</div>
+ </article>
+</section>
 
-  <section class="bottom">
-    <article class="panel">
-      <h2>Paper trading</h2>
-      <p class="small">Practice with simulated positions. No exchange orders are placed.</p>
-      <div class="trade-controls">
-        <label>Position side<select id="side"><option value="LONG">Long</option><option value="SHORT">Short</option></select></label>
-        <label>Stake in USDT<input id="stake" type="number" min="1" step="1" value="100"></label>
-        <button id="open">Open simulated position</button>
-      </div>
-      <div id="position" class="row">No open position.</div>
-      <button id="close" class="secondary" disabled>Close position</button>
-    </article>
-    <article class="panel">
-      <h2>Trader performance</h2>
-      <div class="stats">
-        <div><span class="small">Closed</span><strong id="count">0</strong></div>
-        <div><span class="small">Win rate</span><strong id="win">—</strong></div>
-        <div><span class="small">Net P/L</span><strong id="pnl">$0.00</strong></div>
-      </div>
-      <div class="tablewrap">
-        <table><thead><tr><th>Market / Side</th><th>Entry</th><th>Exit</th><th>P/L</th></tr></thead><tbody id="journal"><tr><td colspan="4">No closed positions.</td></tr></tbody></table>
-      </div>
-      <button id="clear" class="secondary" style="margin-top:12px">Clear journal</button>
-    </article>
-  </section>
-  <footer>THE_IRISHMAN_1 · Public market data · Educational use · No real-money trading</footer>
+<section id="lab" class="grid columns">
+ <article class="panel">
+  <h2>Strategy Lab</h2><p class="small">Historical long-only EMA crossover test. Simulated entries/exits use the next candle's open.</p>
+  <div class="inline">
+   <label>Fast EMA<input id="fast" type="number" min="2" max="50" value="9"></label>
+   <label>Slow EMA<input id="slow" type="number" min="3" max="200" value="21"></label>
+   <label>Fee per side · %<input id="fee" type="number" min="0" max="2" step=".01" value=".10"></label>
+   <label>Slippage per side · %<input id="slip" type="number" min="0" max="2" step=".01" value=".05"></label>
+  </div>
+  <button id="run">Run historical test</button><div id="btNote" class="small"></div>
+ </article>
+ <article class="panel">
+  <h2>Backtest results</h2>
+  <div class="stats"><div class="stat"><span class="small">Trades</span><strong id="trades">—</strong></div><div class="stat"><span class="small">Win rate</span><strong id="win">—</strong></div><div class="stat"><span class="small">Net return</span><strong id="ret">—</strong></div></div>
+  <div class="row"><span>Profit factor</span><strong id="pf">—</strong></div>
+  <div class="row"><span>Maximum drawdown</span><strong id="dd">—</strong></div>
+  <div class="row"><span>Buy and hold</span><strong id="hold">—</strong></div>
+  <p id="btDetails" class="small">Run a test to compare the rule with holding the asset.</p>
+  <div class="note">Past results do not predict future performance. Results are sensitive to fees, slippage, sample selection, and execution assumptions.</div>
+ </article>
+</section>
+
+<section id="risk" class="grid columns">
+ <article class="panel">
+  <h2>Risk Calculator</h2><p class="small">Estimate position size using account equity, risk allowance, entry and stop prices.</p>
+  <div class="inline">
+   <label>Account equity · USDT<input id="equity" type="number" min="0" value="1000"></label>
+   <label>Risk · %<input id="riskPct" type="number" min=".1" max="10" step=".1" value="1"></label>
+   <label>Entry price<input id="entry" type="number" min="0" step="any" placeholder="Use current price"></label>
+   <label>Stop price<input id="stop" type="number" min="0" step="any" placeholder="Enter stop price"></label>
+  </div>
+  <button id="calc">Calculate position size</button><div id="riskResult" class="metric">—</div><div id="riskDetails" class="small">Enter a stop price to calculate.</div>
+ </article>
+ <article id="paper" class="panel">
+  <h2>Paper Trading</h2><p class="small">Simulated positions only. No wallet connection or real exchange orders.</p>
+  <div class="inline"><label>Direction<select id="side"><option value="LONG">Long</option><option value="SHORT">Short</option></select></label><label>Stake · USDT<input id="stake" type="number" min="1" value="100"></label></div>
+  <div class="actions"><button id="open">Open simulated position</button><button id="close" class="secondary" disabled>Close position</button></div>
+  <div id="position" class="row"><span>No open position</span><strong>—</strong></div><div id="paperNote" class="small"></div>
+ </article>
+</section>
+
+<section id="journal" class="panel" style="margin-bottom:13px">
+ <div class="split"><h2>Paper-trade journal</h2><button id="export" class="secondary" style="width:auto">Export CSV</button></div>
+ <div class="stats"><div class="stat"><span class="small">Closed trades</span><strong id="jCount">0</strong></div><div class="stat"><span class="small">Win rate</span><strong id="jWin">—</strong></div><div class="stat"><span class="small">Net P/L</span><strong id="jPnl">$0.00</strong></div></div>
+ <div class="tablewrap"><table><thead><tr><th>Closed</th><th>Market</th><th>Side</th><th>Entry</th><th>Exit</th><th>P/L</th></tr></thead><tbody id="journalRows"><tr><td colspan="6" class="empty">No closed trades yet.</td></tr></tbody></table></div>
+ <div class="actions" style="margin-top:12px"><button id="clear" class="secondary">Clear local journal</button></div>
+</section>
+
+<section id="knowledge" class="panel">
+ <h2>Knowledge Desk</h2><div class="knowledge">
+ <article><strong>RSI · momentum</strong><p>Compares recent gains and losses. Readings above 70 or below 30 can persist in strong trends.</p></article>
+ <article><strong>EMA · trend</strong><p>Weights recent prices more heavily. Crossovers lag and can produce false signals in sideways markets.</p></article>
+ <article><strong>MACD · momentum shift</strong><p>Compares fast and slow averages. Signal-line crosses describe momentum, not certainty.</p></article>
+ <article><strong>Bollinger bands · dispersion</strong><p>Typically a moving average plus/minus two standard deviations. Band touches do not guarantee reversals.</p></article>
+ <article><strong>Volatility · movement</strong><p>Recent candle ranges describe past movement, not future risk. Gaps and fast moves can exceed expectations.</p></article>
+ <article><strong>Backtesting · evidence</strong><p>Include costs, compare a baseline, test unseen periods, and avoid tuning a strategy repeatedly to one sample.</p></article>
+ </div>
+</section>
+<footer>THE IRISHMAN 1 · Educational research tool, not individualized financial advice. Never enter seed phrases, passwords, or exchange API secrets. Market feed requires internet access; the paper journal is stored locally in this browser.</footer>
 </main>
-
 <script>
-const $=id=>document.getElementById(id);
-const S={candles:[],position:null,journal:[]};
-const num=n=>Number.isFinite(n)?n.toLocaleString("en-US",{maximumFractionDigits:n>100?2:5}):"—";
-const usd=n=>(n<0?"-":"")+"$"+Math.abs(n).toFixed(2);
-const label=s=>s.replace("USDT"," / USDT");
-function ema(a,p){
- let r=Array(a.length).fill(null);if(a.length<p)return r;
- let v=a.slice(0,p).reduce((x,y)=>x+y,0)/p;r[p-1]=v;
- for(let i=p;i<a.length;i++){v=a[i]*(2/(p+1))+v*(1-2/(p+1));r[i]=v}
- return r
-}
-function rsi(a,p=14){
- let r=Array(a.length).fill(null);if(a.length<=p)return r;
- let g=0,l=0;for(let i=1;i<=p;i++){let d=a[i]-a[i-1];g+=Math.max(d,0);l+=Math.max(-d,0)}
- g/=p;l/=p;r[p]=l===0?100:100-100/(1+g/l);
- for(let i=p+1;i<a.length;i++){let d=a[i]-a[i-1];g=(g*(p-1)+Math.max(d,0))/p;l=(l*(p-1)+Math.max(-d,0))/p;r[i]=l===0?100:100-100/(1+g/l)}
- return r
-}
-function bands(a,p=20){
- let mid=Array(a.length).fill(null),up=mid.slice(),lo=mid.slice();
- for(let i=p-1;i<a.length;i++){let v=a.slice(i-p+1,i+1),m=v.reduce((x,y)=>x+y,0)/p,d=Math.sqrt(v.reduce((x,y)=>x+(y-m)**2,0)/p);mid[i]=m;up[i]=m+2*d;lo[i]=m-2*d}
- return {mid,up,lo}
-}
+'use strict';
+const $=id=>document.getElementById(id),STORE='irishman1-paper-v2';
+const S={candles:[],position:null,journal:[],busy:false};
+const fmt=(n,d=2)=>Number.isFinite(n)?n.toLocaleString('en-US',{maximumFractionDigits:d}):'—';
+const money=n=>(n<0?'−':'')+'$'+Math.abs(n).toFixed(2);
+const pair=s=>s.replace('USDT',' / USDT');
+function set(id,v){$(id).textContent=v}
+function ema(a,p){let o=Array(a.length).fill(null);if(a.length<p)return o;let v=a.slice(0,p).reduce((x,y)=>x+y,0)/p;o[p-1]=v;let k=2/(p+1);for(let i=p;i<a.length;i++)o[i]=v=a[i]*k+v*(1-k);return o}
+function rsi(a,p=14){let o=Array(a.length).fill(null);if(a.length<=p)return o;let g=0,l=0;for(let i=1;i<=p;i++){let d=a[i]-a[i-1];g+=Math.max(0,d);l+=Math.max(0,-d)}g/=p;l/=p;o[p]=l?100-100/(1+g/l):100;for(let i=p+1;i<a.length;i++){let d=a[i]-a[i-1];g=(g*(p-1)+Math.max(0,d))/p;l=(l*(p-1)+Math.max(0,-d))/p;o[i]=l?100-100/(1+g/l):100}return o}
+function boll(a,p=20){let mid=Array(a.length).fill(null),up=mid.slice(),lo=mid.slice();for(let i=p-1;i<a.length;i++){let v=a.slice(i-p+1,i+1),m=v.reduce((x,y)=>x+y,0)/p,sd=Math.sqrt(v.reduce((x,y)=>x+(y-m)**2,0)/p);mid[i]=m;up[i]=m+2*sd;lo[i]=m-2*sd}return{mid,up,lo}}
+function ind(c){let a=c.map(k=>k.close),e9=ema(a,9),e21=ema(a,21),r=rsi(a),e12=ema(a,12),e26=ema(a,26),m=a.map((_,i)=>e12[i]==null||e26[i]==null?null:e12[i]-e26[i]),sig=ema(m.map(v=>v??0),9);return{a,e9,e21,r,m,sig,b:boll(a)}}
 async function load(){
- $("refresh").disabled=true;$("chartStatus").textContent="Fetching market candles…";
+ if(S.busy)return;S.busy=true;$('refresh').disabled=true;set('chartNote','Fetching public market candles…');
  try{
-  let s=$("symbol").value,iv=$("interval").value;
-  let res=await fetch(`https://api.binance.com/api/v3/klines?symbol=${s}&interval=${iv}&limit=100`,{cache:"no-store"});
-  if(!res.ok)throw Error("Market endpoint HTTP "+res.status);
-  let raw=await res.json();
-  S.candles=raw.map(k=>({time:k[0],open:+k[1],high:+k[2],low:+k[3],close:+k[4]}));
-  if(S.candles.length<30)throw Error("Not enough candles for indicators");
-  render();$("status").textContent="● Public market data connected";$("status").className="status green";
-  $("updated").textContent="Updated "+new Date().toLocaleTimeString();
-  $("chartStatus").textContent=`${raw.length} candles · ${iv} interval · refreshes every 30 seconds`;
- }catch(e){$("status").textContent="Market data unavailable";$("status").className="status red";$("chartStatus").textContent=e.message+". Check internet access and retry."}
- finally{$("refresh").disabled=false}
+  let url='https://data-api.binance.vision/api/v3/klines?symbol='+encodeURIComponent($('symbol').value)+'&interval='+encodeURIComponent($('interval').value)+'&limit='+$('limit').value;
+  let ctl=new AbortController(),timer=setTimeout(()=>ctl.abort(),12000),res;
+  try{res=await fetch(url,{cache:'no-store',signal:ctl.signal})}finally{clearTimeout(timer)}
+  if(!res.ok)throw Error('Market feed HTTP '+res.status);
+  let raw=await res.json();if(!Array.isArray(raw)||raw.length<30)throw Error('Insufficient candle history');
+  S.candles=raw.map(k=>({time:+k[0],open:+k[1],high:+k[2],low:+k[3],close:+k[4]}));
+  if(S.candles.some(k=>![k.open,k.high,k.low,k.close].every(Number.isFinite)))throw Error('Invalid candle data');
+  render();$('status').className='small green';set('status','● Market feed connected');set('chartNote',S.candles.length+' candles loaded · latest candle may still be open');set('paperNote','');
+ }catch(e){$('status').className='small red';set('status','● Market feed unavailable');set('chartNote',(e.name==='AbortError'?'Request timed out':e.message)+'. Check internet and refresh.')}
+ finally{S.busy=false;$('refresh').disabled=false}
 }
 function render(){
- const c=S.candles,a=c.map(x=>x.close),i=a.length-1,last=c[i],prev=c[i-1];
- const e9=ema(a,9),e21=ema(a,21),rr=rsi(a),f=ema(a,12),sl=ema(a,26);
- const m=a.map((_,j)=>f[j]===null||sl[j]===null?null:f[j]-sl[j]);
- const sig=ema(m.map(x=>x??0),9),b=bands(a);
- $("marketName").textContent=label($("symbol").value);
- $("chartTitle").textContent=label($("symbol").value)+" · "+$("interval").value;
- $("price").textContent=num(last.close);
- const ch=(last.close/prev.close-1)*100;
- $("change").textContent=(ch>=0?"+":"")+ch.toFixed(2)+"% vs previous candle";
- $("change").className="small "+(ch>=0?"green":"red");
- $("rsi").textContent=num(rr[i]);$("rsiText").textContent=rr[i]>=70?"Potentially overbought":rr[i]<=30?"Potentially oversold":"Neutral momentum";
- $("macd").textContent=num(m[i]);$("macdText").textContent=m[i]>sig[i]?"MACD above signal":"MACD below signal";
- $("ema").textContent=num(e9[i])+" / "+num(e21[i]);$("emaText").textContent=e9[i]>e21[i]?"Short EMA above long EMA":"Short EMA below long EMA";
- $("trend").textContent=last.close>e21[i]?"Above EMA 21":"Below EMA 21";
- $("bb").textContent=last.close>b.up[i]?"Above upper band":last.close<b.lo[i]?"Below lower band":last.close>b.mid[i]?"Upper half":"Lower half";
- $("candle").textContent=last.close>=last.open?"Bullish close":"Bearish close";
- let score=(e9[i]>e21[i]?1:-1)+(m[i]>sig[i]?1:-1)+(last.close>e21[i]?1:-1)+(rr[i]>50?1:-1);
- $("score").textContent=(score>0?"+":"")+score+" / 4";
- let sigEl=$("signal"),txt="MIXED / WAIT",cls="";
- if(score>=3){txt="BULLISH BIAS";cls="bull"}else if(score<=-3){txt="BEARISH BIAS";cls="bear"}
- sigEl.textContent=txt;sigEl.className="signal "+cls;
- $("summary").textContent=score>=3?"Several indicators lean upward. This is not a guarantee; confirm risk before acting.":score<=-3?"Several indicators lean downward. This is not a guarantee; confirm risk before acting.":"Indicators are mixed. Waiting for clearer confirmation may reduce forced trades.";
- draw(c,e9,e21);markPosition()
+ let c=S.candles;if(!c.length)return;let i=c.length-1,k=c[i],prev=c[i-1],q=ind(c),{a,e9,e21,r,m,sig,b}=q,chg=(k.close/prev.close-1)*100,sym=$('symbol').value,d=k.close<1?6:2;
+ set('chartTitle',pair(sym)+' · '+$('interval').value);set('price',fmt(k.close,d));set('change',(chg>=0?'+':'')+chg.toFixed(2)+'% vs previous candle');$('change').className='small '+(chg>=0?'green':'red');
+ set('rsi',fmt(r[i]));set('rsiNote',r[i]>=70?'Elevated momentum':r[i]<=30?'Weak momentum':'Mid-range momentum');
+ set('macd',fmt(m[i],d));set('macdNote',m[i]>sig[i]?'MACD above signal':'MACD below signal');
+ set('ema',fmt(e9[i],d)+' / '+fmt(e21[i],d));set('emaNote',e9[i]>e21[i]?'Fast EMA above slow EMA':'Fast EMA below slow EMA');
+ set('trend',k.close>=e21[i]?'Above EMA 21':'Below EMA 21');set('bands',k.close>b.up[i]?'Above upper band':k.close<b.lo[i]?'Below lower band':k.close>=b.mid[i]?'Upper half':'Lower half');set('candle',k.close>=k.open?'Bullish close':'Bearish close');
+ let votes=[e9[i]>e21[i],m[i]>sig[i],k.close>e21[i],r[i]>50],sc=votes.filter(Boolean).length*2-4,lab=sc>=3?'BULLISH BIAS':sc<=-3?'BEARISH BIAS':'MIXED · WAIT';
+ set('score',(sc>0?'+':'')+sc+' / 4');$('signal').textContent=lab;$('signal').className='chip '+(sc>=3?'bull':sc<=-3?'bear':'');
+ set('signalText',sc>=3?'Trend and momentum indicators lean bullish. Verify risk and conditions.':sc<=-3?'Indicators lean bearish. This is not a short recommendation.':'Indicators disagree; this ruleset has no strong directional agreement.');
+ let ranges=c.slice(-20).map(x=>(x.high-x.low)/x.close*100);set('volatility',fmt(ranges.reduce((x,y)=>x+y,0)/ranges.length,3)+'%');
+ draw(c,e9,e21);markPosition();journalRender();backtest(false);
 }
 function draw(c,e9,e21){
- const cv=$("chart"),r=cv.getBoundingClientRect(),d=window.devicePixelRatio||1;
- cv.width=Math.max(1,r.width*d);cv.height=Math.max(1,r.height*d);
- const xctx=cv.getContext("2d");xctx.scale(d,d);
- const w=r.width,h=r.height,p={l:5,r:58,t:12,b:12},cw=w-p.l-p.r,ch=h-p.t-p.b,start=Math.max(0,c.length-60),v=c.slice(start);
- let min=Math.min(...v.map(x=>x.low)),max=Math.max(...v.map(x=>x.high)),range=max-min||1;min-=range*.07;max+=range*.07;
- const x=i=>p.l+i*cw/Math.max(1,v.length-1),y=z=>p.t+(max-z)/(max-min)*ch;
- xctx.font="10px system-ui";xctx.strokeStyle="#283950";xctx.fillStyle="#91a3bc";
- for(let j=0;j<5;j++){let yy=p.t+j*ch/4;xctx.beginPath();xctx.moveTo(p.l,yy);xctx.lineTo(w-p.r,yy);xctx.stroke();xctx.fillText(num(max-j*(max-min)/4),w-p.r+4,yy+3)}
- v.forEach((k,j)=>{let xx=x(j),yo=y(k.open),yc=y(k.close),up=k.close>=k.open;xctx.strokeStyle=up?"#63e6be":"#ff7889";xctx.fillStyle=xctx.strokeStyle;xctx.beginPath();xctx.moveTo(xx,y(k.high));xctx.lineTo(xx,y(k.low));xctx.stroke();xctx.fillRect(xx-2,Math.min(yo,yc),4,Math.max(1,Math.abs(yc-yo)))});
- function line(arr,color){xctx.beginPath();xctx.strokeStyle=color;xctx.lineWidth=1.6;let begun=false;arr.slice(start).forEach((z,j)=>{if(z==null)return;if(!begun){xctx.moveTo(x(j),y(z));begun=true}else xctx.lineTo(x(j),y(z))});xctx.stroke()}
- line(e9,"#83aaff");line(e21,"#f5ce79")
+ let cv=$('chart'),r=cv.getBoundingClientRect(),dpr=devicePixelRatio||1,w=Math.max(250,r.width),h=Math.max(200,r.height);
+ cv.width=w*dpr;cv.height=h*dpr;let x=cv.getContext('2d');x.setTransform(dpr,0,0,dpr,0,0);x.clearRect(0,0,w,h);
+ let sh=c.slice(-60),start=c.length-sh.length,p={l:5,r:65,t:12,b:10},cw=w-p.l-p.r,ch=h-p.t-p.b,min=Math.min(...sh.map(v=>v.low)),max=Math.max(...sh.map(v=>v.high)),rg=max-min||1;min-=rg*.06;max+=rg*.06;
+ let xx=j=>p.l+j*cw/Math.max(1,sh.length-1),yy=n=>p.t+(max-n)/(max-min)*ch;
+ x.font='10px system-ui';x.strokeStyle='#293b53';x.fillStyle='#93a6c0';
+ for(let j=0;j<5;j++){let y=p.t+j*ch/4;x.beginPath();x.moveTo(p.l,y);x.lineTo(w-p.r,y);x.stroke();x.fillText(fmt(max-j*(max-min)/4,max<1?5:2),w-p.r+4,y+3)}
+ sh.forEach((v,j)=>{let ox=xx(j),yo=yy(v.open),yc=yy(v.close);x.strokeStyle=x.fillStyle=v.close>=v.open?'#63e6be':'#ff7889';x.beginPath();x.moveTo(ox,yy(v.high));x.lineTo(ox,yy(v.low));x.stroke();x.fillRect(ox-2,Math.min(yo,yc),4,Math.max(1,Math.abs(yc-yo)))});
+ function line(arr,color){x.beginPath();x.strokeStyle=color;x.lineWidth=1.5;let first=true;arr.slice(start).forEach((v,j)=>{if(v==null)return;if(first){x.moveTo(xx(j),yy(v));first=false}else x.lineTo(xx(j),yy(v))});x.stroke()}
+ line(e9,'#83aaff');line(e21,'#f5ce79');
 }
+function backtest(show=true){
+ let c=S.candles;if(c.length<50){if(show)set('btNote','Load at least 50 candles first.');return}
+ let f=+$('fast').value,sl=+$('slow').value,fee=+$('fee').value/100,slip=+$('slip').value/100;
+ if(!(f>=2&&sl>f&&sl<=200&&fee>=0&&slip>=0)){set('btNote','Slow EMA must exceed fast EMA. Costs must be nonnegative.');return}
+ let a=c.map(v=>v.close),ef=ema(a,f),es=ema(a,sl),cost=fee+slip,holding=false,entry=0,eq=1,peak=1,dd=0,wins=0,gw=0,gl=0,n=0;
+ function closeAt(price){let ret=price*(1-cost)/entry-1;eq*=1+ret;n++;if(ret>0){wins++;gw+=ret}else gl+=Math.abs(ret);peak=Math.max(peak,eq);dd=Math.max(dd,(peak-eq)/peak);holding=false}
+ for(let i=1;i<c.length-1;i++){if(ef[i-1]==null||es[i-1]==null)continue;let up=ef[i-1]<=es[i-1]&&ef[i]>es[i],dn=ef[i-1]>=es[i-1]&&ef[i]<es[i];if(!holding&&up){entry=c[i+1].open*(1+cost);holding=true}else if(holding&&dn)closeAt(c[i+1].open)}
+ if(holding)closeAt(c.at(-1).close);
+ let ret=(eq-1)*100,hold=(c.at(-1).close/c[0].open-1)*100;
+ set('trades',n);set('win',n?Math.round(wins/n*100)+'%':'—');set('ret',(ret>=0?'+':'')+ret.toFixed(2)+'%');$('ret').className=ret>=0?'green':'red';set('pf',gl===0?(gw?'∞':'—'):(gw/gl).toFixed(2));set('dd',(dd*100).toFixed(2)+'%');set('hold',(hold>=0?'+':'')+hold.toFixed(2)+'%');
+ set('btDetails',c.length+' candles · '+new Date(c[0].time).toLocaleDateString()+'–'+new Date(c.at(-1).time).toLocaleDateString()+'. Long-only; excludes taxes and funding.');
+ if(show)set('btNote','Test complete. Historical simulation only.');
+}
+function risk(){
+ let eq=+$('equity').value,r=+$('riskPct').value/100,en=+$('entry').value||S.candles.at(-1)?.close,st=+$('stop').value;
+ if(!(eq>0&&r>=.001&&r<=.1&&en>0&&st>0&&st!==en)){set('riskResult','Cannot calculate');set('riskDetails','Enter positive equity, risk of 0.1–10%, and a different stop price.');return}
+ let dist=Math.abs(en-st)/en,loss=eq*r,notional=loss/dist;
+ set('riskResult',money(notional)+' position');set('riskDetails','Risk budget '+money(loss)+' · Stop distance '+(dist*100).toFixed(2)+'% · Quantity '+fmt(notional/en,6)+'. Excludes fees, slippage and gaps.');
+}
+function save(){try{localStorage.setItem(STORE,JSON.stringify({position:S.position,journal:S.journal.slice(0,300)}))}catch{set('paperNote','Browser storage unavailable; data may not persist.')}}
 function markPosition(){
- const p=S.position,price=S.candles.at(-1)?.close;
- if(!p||!price)return;
- let pnl=(price-p.entry)/p.entry*p.stake*(p.side==="LONG"?1:-1);
- $("position").innerHTML=`${p.side} ${label(p.symbol)} · Entry <b>${num(p.entry)}</b><br>Current <b>${num(price)}</b> · Floating P/L <b class="${pnl>=0?"green":"red"}">${usd(pnl)}</b>`;
+ let p=S.position,price=p&&p.symbol===$('symbol').value?S.candles.at(-1)?.close:null,el=$('position');el.replaceChildren();let a=document.createElement('span'),b=document.createElement('strong');
+ if(!p){a.textContent='No open position';b.textContent='—';$('close').disabled=true}
+ else{let pnl=price==null?null:(price-p.entry)/p.entry*p.stake*(p.side==='LONG'?1:-1);a.textContent=p.side+' '+pair(p.symbol)+' · Entry '+fmt(p.entry,p.entry<1?6:2);b.textContent=pnl==null?'Select position market':'Floating '+money(pnl);b.className=pnl==null?'':pnl>=0?'green':'red';$('close').disabled=price==null}
+ el.append(a,b);
 }
-$("open").onclick=()=>{
- if(!S.candles.length)return alert("Wait for market data first.");
- let stake=+$("stake").value;if(!(stake>0))return alert("Enter a positive stake.");
- if(S.position)return alert("Close the current simulated position first.");
- S.position={symbol:$("symbol").value,side:$("side").value,stake,entry:S.candles.at(-1).close};
- $("close").disabled=false;markPosition()
-};
-$("close").onclick=()=>{
- if(!S.position||!S.candles.length)return;
- let p=S.position,exit=S.candles.at(-1).close;
- p.exit=exit;p.pnl=(exit-p.entry)/p.entry*p.stake*(p.side==="LONG"?1:-1);
- S.journal.unshift(p);S.position=null;$("close").disabled=true;
- $("position").textContent="Position closed and recorded.";journal()
-};
-function journal(){
- let j=S.journal,net=j.reduce((s,t)=>s+t.pnl,0);
- $("count").textContent=j.length;$("win").textContent=j.length?Math.round(j.filter(t=>t.pnl>0).length/j.length*100)+"%":"—";
- $("pnl").textContent=usd(net);$("pnl").className=net>=0?"green":"red";
- $("journal").innerHTML=j.length?j.map(t=>`<tr><td>${label(t.symbol)}<br>${t.side}</td><td>${num(t.entry)}</td><td>${num(t.exit)}</td><td class="${t.pnl>=0?"green":"red"}">${usd(t.pnl)}</td></tr>`).join(""):'<tr><td colspan="4">No closed positions.</td></tr>'
+function journalRender(){
+ let j=S.journal,net=j.reduce((s,t)=>s+t.pnl,0);set('jCount',j.length);set('jWin',j.length?Math.round(j.filter(t=>t.pnl>0).length/j.length*100)+'%':'—');set('jPnl',money(net));$('jPnl').className=net>=0?'green':'red';
+ let body=$('journalRows');body.replaceChildren();if(!j.length){let tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=6;td.className='empty';td.textContent='No closed trades yet.';tr.append(td);body.append(tr);return}
+ j.forEach(t=>{let tr=document.createElement('tr'),vals=[new Date(t.closedAt).toLocaleString(),pair(t.symbol),t.side,fmt(t.entry,t.entry<1?6:2),fmt(t.exit,t.exit<1?6:2),money(t.pnl)];vals.forEach((v,i)=>{let td=document.createElement('td');td.textContent=v;if(i===5)td.className=t.pnl>=0?'green':'red';tr.append(td)});body.append(tr)});
 }
-$("refresh").onclick=load;$("symbol").onchange=load;$("interval").onchange=load;
-$("clear").onclick=()=>{S.journal=[];journal()};
-window.onresize=()=>S.candles.length&&render();
-load();setInterval(load,30000);
+try{let d=JSON.parse(localStorage.getItem(STORE)||'{}');S.position=d.position||null;S.journal=Array.isArray(d.journal)?d.journal.filter(t=>t&&Number.isFinite(t.pnl)):[]}catch{}
+$('refresh').addEventListener('click',load);['symbol','interval','limit'].forEach(id=>$(id).addEventListener('change',load));$('run').addEventListener('click',()=>backtest(true));$('calc').addEventListener('click',risk);
+$('open').addEventListener('click',()=>{if(!S.candles.length)return set('paperNote','Wait for market data.');if(S.position)return set('paperNote','Close the current simulated position first.');let stake=+$('stake').value;if(!(stake>0))return set('paperNote','Enter a positive stake.');S.position={symbol:$('symbol').value,side:$('side').value,stake,entry:S.candles.at(-1).close,openedAt:Date.now()};save();markPosition();set('paperNote','Simulated position opened. No real order placed.')});
+$('close').addEventListener('click',()=>{let p=S.position,price=S.candles.at(-1)?.close;if(!p||!price||p.symbol!==$('symbol').value)return set('paperNote','Select the position market and load data.');S.journal.unshift({...p,exit:price,closedAt:Date.now(),pnl:(price-p.entry)/p.entry*p.stake*(p.side==='LONG'?1:-1)});S.journal=S.journal.slice(0,300);S.position=null;save();markPosition();journalRender();set('paperNote','Paper position closed and saved locally.')});
+$('clear').addEventListener('click',()=>{if(confirm('Clear the paper journal stored in this browser?')){S.journal=[];save();journalRender();set('paperNote','Local journal cleared.')}});
+$('export').addEventListener('click',()=>{if(!S.journal.length)return set('paperNote','No closed trades to export.');let q=v=>'"'+String(v??'').replaceAll('"','""')+'"',rows=[['closed_at','symbol','side','stake_usdt','entry','exit','pnl_usdt'],...S.journal.map(t=>[new Date(t.closedAt).toISOString(),t.symbol,t.side,t.stake,t.entry,t.exit,t.pnl])],blob=new Blob([rows.map(r=>r.map(q).join(',')).join('\\r\\n')],{type:'text/csv'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='irishman-paper-trades.csv';a.click();URL.revokeObjectURL(url)});
+window.addEventListener('resize',()=>{if(S.candles.length){let q=ind(S.candles);draw(S.candles,q.e9,q.e21)}});
+journalRender();markPosition();load();setInterval(load,30000);
 </script>
 </body>
 </html>
+
